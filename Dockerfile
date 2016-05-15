@@ -55,7 +55,7 @@ VOLUME ["/var/atlassian/confluence", "/opt/atlassian/confluence/logs"]
 WORKDIR /var/atlassian/confluence
 
 COPY docker-entrypoint.sh /
-RUN dos2unix /docker-entrypoint.sh
+RUN sudo dos2unix /docker-entrypoint.sh
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
