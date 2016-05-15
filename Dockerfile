@@ -54,8 +54,9 @@ VOLUME ["/var/atlassian/confluence", "/opt/atlassian/confluence/logs"]
 # Set the default working directory as the Confluence home directory.
 WORKDIR /var/atlassian/confluence
 
-COPY docker-entrypoint.sh /
-RUN sudo dos2unix /docker-entrypoint.sh
+ADD docker-entrypoint.sh /
+RUN chmod -R 700 /docker-entrypoint.sh && \
+    dos2unix /docker-entrypoint.sh
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
