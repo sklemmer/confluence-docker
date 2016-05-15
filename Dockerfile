@@ -6,7 +6,6 @@ ENV CONF_INSTALL  /opt/atlassian/confluence
 ENV CONF_VERSION  5.9.10
 
 ADD docker-entrypoint.sh /
-RUN dos2unix /docker-entrypoint.sh
 
 # Install Atlassian Confluence and helper tools and setup initial home
 # directory structure.
@@ -14,6 +13,7 @@ RUN set -x \
     && apt-get update --quiet \
     && apt-get install --quiet --yes --no-install-recommends libtcnative-1 xmlstarlet dos2unix \
     && apt-get clean \
+    && dos2unix /docker-entrypoint.sh \
     && mkdir -p                "${CONF_HOME}" \
     && chmod -R 700            "${CONF_HOME}" \
     && chown daemon:daemon     "${CONF_HOME}" \
