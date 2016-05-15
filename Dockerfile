@@ -5,6 +5,9 @@ ENV CONF_HOME     /var/atlassian/confluence
 ENV CONF_INSTALL  /opt/atlassian/confluence
 ENV CONF_VERSION  5.9.10
 
+ADD docker-entrypoint.sh /
+RUN dos2unix /docker-entrypoint.sh
+
 # Install Atlassian Confluence and helper tools and setup initial home
 # directory structure.
 RUN set -x \
@@ -54,10 +57,7 @@ VOLUME ["/var/atlassian/confluence", "/opt/atlassian/confluence/logs"]
 # Set the default working directory as the Confluence home directory.
 WORKDIR /var/atlassian/confluence
 
-ADD docker-entrypoint.sh /tmp
-RUN dos2unix /tmp/docker-entrypoint.sh
-
-ENTRYPOINT ["/tmp/docker-entrypoint.sh"]
+ENTRYPOINT ["/docker-entrypoint.sh"]
 
 # Run Atlassian Confluence as a foreground process by default.
 CMD ["/opt/atlassian/confluence/bin/catalina.sh", "run"]
