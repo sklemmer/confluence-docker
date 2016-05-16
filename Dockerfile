@@ -12,7 +12,7 @@ RUN set -x \
     && apt-get update --quiet \
     && apt-get install --quiet --yes --no-install-recommends libtcnative-1 xmlstarlet dos2unix \
     && apt-get clean \
-    && mkdir -p                "${CONF_HOME}"
+    && mkdir -p "${CONF_HOME}"
 
 ADD docker-entrypoint.sh "${CONF_HOME}"
 
